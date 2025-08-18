@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anzara's Cake Shop - React Test</title>
+    
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        /* Custom styles from the original HTML */
+        .header__logo img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #f5f5f5;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header__logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer__about__logo img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #f5f5f5;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        /* Featured Section styles */
+        .featured {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        .featured__controls {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .featured__controls ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .featured__controls ul li {
+            display: inline-block;
+            margin: 0 10px;
+            padding: 10px 20px;
+            background: #fff;
+            border: 2px solid #e7ab3c;
+            color: #e7ab3c;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .featured__controls ul li:hover,
+        .featured__controls ul li.active {
+            background: #e7ab3c;
+            color: #fff;
+        }
+        
+        .featured__item {
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .featured__item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .featured__item__pic {
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .featured__item__pic__hover {
+            position: absolute;
+            left: 0;
+            bottom: -50px;
+            width: 100%;
+            text-align: center;
+            transition: all 0.3s ease;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .featured__item:hover .featured__item__pic__hover {
+            bottom: 0;
+        }
+        
+        .featured__item__pic__hover li {
+            display: inline-block;
+            margin: 0 5px;
+        }
+        
+        .featured__item__pic__hover li a {
+            display: block;
+            width: 40px;
+            height: 40px;
+            background: #e7ab3c;
+            color: #fff;
+            text-align: center;
+            line-height: 40px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        .featured__item__pic__hover li a:hover {
+            background: #333;
+            transform: scale(1.1);
+        }
+        
+        .featured__item__text {
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .featured__item__text h6 {
+            margin-bottom: 10px;
+        }
+        
+        .featured__item__text h6 a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        .featured__item__text h6 a:hover {
+            color: #e7ab3c;
+        }
+        
+        .featured__item__text h5 {
+            color: #e7ab3c;
+            font-weight: 700;
+            font-size: 18px;
+            margin: 0;
+        }
+        
+        /* Footer styles */
+        .footer {
+            background: #333;
+            color: #fff;
+            padding: 60px 0 30px;
+        }
+        
+        .footer__about__logo {
+            margin-bottom: 20px;
+        }
+        
+        .footer__about__logo a {
+            text-decoration: none;
+        }
+        
+        .footer__about ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .footer__about ul li {
+            margin-bottom: 10px;
+            color: #ccc;
+            font-size: 14px;
+        }
+        
+        .footer__widget h6 {
+            color: #fff;
+            font-weight: 700;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        
+        .footer__widget ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: inline-block;
+            margin-right: 30px;
+        }
+        
+        .footer__widget ul li {
+            margin-bottom: 8px;
+        }
+        
+        .footer__widget ul li a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+        
+        .footer__widget ul li a:hover {
+            color: #e7ab3c;
+        }
+        
+        .footer__widget__social {
+            margin-top: 20px;
+        }
+        
+        .footer__widget__social a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: #e7ab3c;
+            color: #fff;
+            text-align: center;
+            line-height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .footer__widget__social a:hover {
+            background: #fff;
+            color: #e7ab3c;
+            transform: translateY(-2px);
+        }
+        
+        /* Header styles */
+        .header {
+            background: #ffffff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header__top {
+            background: #f5f5f5;
+            padding: 10px 0;
+        }
+        
+        .header__top__left ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .header__top__left ul li {
+            display: inline-block;
+            margin-right: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .header__top__right__social a {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background: #333;
+            color: #fff;
+            text-align: center;
+            line-height: 30px;
+            border-radius: 50%;
+            margin-left: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .header__top__right__social a:hover {
+            background: #e7ab3c;
+            transform: translateY(-2px);
+        }
+        
+        .header__logo {
+            padding: 20px 0;
+        }
+        
+        .header__logo a {
+            text-decoration: none;
+        }
+        
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.9);
+        }
+        
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+        }
+        
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90%;
+            margin-top: 5%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="header__top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="header__top__left">
+                            <ul>
+                                <li><i class="fa fa-envelope"></i> hello@anzarascakes.com</li>
+                                <li>A ready-to-eat slice of heaven.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="header__top__right">
+                            <div class="header__top__right__social">
+                                <a href="https://www.facebook.com/AnzaraCakes" target="_blank"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#"><i class="fa fa-linkedin"></i></a>
+                                <a href="#"><i class="fa fa-pinterest-p"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="header__logo">
+                        <a href="./index.html"><img src="img/logo.jpg" alt="Anzara's Cake Shop"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Featured Section -->
+    <section class="featured spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <h2>Welcome to the world of Anzara's Cakes</h2>
+                    </div>
+                    <div class="featured__controls">
+                        <ul>
+                            <li class="active" onclick="filterProducts('*')">All Cakes</li>
+                            <li onclick="filterProducts('set-price-cakes')">Set Price Cake</li>
+                            <li onclick="filterProducts('customize-cakes')">Customize Cake</li>
+                            <li onclick="filterProducts('cutie-cakes')">Cutie Cakes</li>
+                            <li onclick="filterProducts('other-cakes')">Other</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row featured__filter" id="productsContainer">
+                <!-- Products will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="footer spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="footer__about">
+                        <div class="footer__about__logo">
+                            <a href="./index.html"><img src="img/logo.jpg" alt="Anzara's Cake Shop"></a>
+                        </div>
+                        <ul>
+                            <li>Address: Badda, Dhaka-1212</li>
+                            <li>Phone: +8801301927872</li>
+                            <li>Email: hello@anzarascakes.com</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
+                    <div class="footer__widget">
+                        <h6>Useful Links</h6>
+                        <ul>
+                            <li><a href="#">About Our Bakery</a></li>
+                            <li><a href="#">Our Cake Collection</a></li>
+                            <li><a href="#">Secure Ordering</a></li>
+                            <li><a href="#">Delivery Information</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Our Sitemap</a></li>
+                        </ul>
+                        <ul>
+                            <li><a href="#">Who We Are</a></li>
+                            <li><a href="#">Custom Cake Services</a></li>
+                            <li><a href="#">Wedding Cakes</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="#">Cake Innovation</a></li>
+                            <li><a href="#">Customer Reviews</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    <div class="footer__widget">
+                        <div class="footer__widget__social">
+                            <a href="https://www.facebook.com/AnzaraCakes" target="_blank"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-pinterest"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Image Modal -->
+    <div id="imageModal" class="modal">
+        <span class="close" onclick="closeImageModal()">&times;</span>
+        <img id="modalImage" class="modal-content">
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Product data
+        const products = [
+            // Set Price Cakes
+            { id: 1, name: "Rich Chocolate Fudge Birthday Cake", price: "৳800", image: "img/featured/1.jpg", category: "set-price-cakes" },
+            { id: 2, name: "Classic Vanilla Bean Cupcakes (12 pack)", price: "৳800", image: "img/featured/2.jpg", category: "set-price-cakes" },
+            { id: 3, name: "Elegant White Wedding Cake (3-tier)", price: "৳800", image: "img/featured/3.jpg", category: "set-price-cakes" },
+            { id: 4, name: "Red Velvet Birthday Cake", price: "৳800", image: "img/featured/4.jpg", category: "set-price-cakes" },
+            { id: 5, name: "Chocolate Lava Cupcakes (6 pack)", price: "৳800", image: "img/featured/6.jpg", category: "set-price-cakes" },
+            { id: 6, name: "Lemon Blueberry Cake", price: "৳800", image: "img/featured/7.jpg", category: "set-price-cakes" },
+            { id: 7, name: "Strawberry Shortcake", price: "৳800", image: "img/featured/9.jpg", category: "set-price-cakes" },
+            { id: 8, name: "Coffee Walnut Cake", price: "৳800", image: "img/featured/10.jpg", category: "set-price-cakes" },
+            { id: 9, name: "White Chocolate Raspberry Cake", price: "৳800", image: "img/featured/12.jpg", category: "set-price-cakes" },
+            { id: 10, name: "Mango Passion Fruit Cake", price: "৳800", image: "img/featured/14.jpg", category: "set-price-cakes" },
+            // Cutie Cakes
+            { id: 11, name: "Carrot Cake with Cream Cheese", price: "৳800", image: "img/featured/5.jpg", category: "cutie-cakes" },
+            { id: 12, name: "Tiramisu Layer Cake", price: "৳800", image: "img/featured/8.jpg", category: "cutie-cakes" },
+            // Customize Cakes
+            { id: 13, name: "Hazelnut Chocolate Cake", image: "img/featured/15.jpg", category: "customize-cakes" },
+            { id: 14, name: "Coconut Cream Cake", image: "img/featured/16.jpg", category: "customize-cakes" },
+            // Other Cakes
+            { id: 15, name: "Black Forest Cake", price: "৳800", image: "img/featured/11.jpg", category: "other-cakes" }
+        ];
+
+        let currentFilter = '*';
+
+        // Initialize products
+        function initializeProducts() {
+            filterProducts('*');
+        }
+
+        // Filter products
+        function filterProducts(filter) {
+            currentFilter = filter;
+            
+            // Update active filter button
+            document.querySelectorAll('.featured__controls ul li').forEach(li => {
+                li.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Filter products
+            const filteredProducts = filter === '*' ? products : products.filter(product => product.category === filter);
+            
+            // Render products
+            renderProducts(filteredProducts);
+        }
+
+        // Render products
+        function renderProducts(productsToRender) {
+            const container = document.getElementById('productsContainer');
+            container.innerHTML = '';
+            
+            productsToRender.forEach(product => {
+                const productHtml = `
+                    <div class="col-lg-3 col-md-4 col-sm-6 mix ${product.category}">
+                        <div class="featured__item">
+                            <div class="featured__item__pic set-bg" style="background-image: url('${product.image}')">
+                                <ul class="featured__item__pic__hover">
+                                    <li><a href="${product.image}" download><i class="fa fa-download"></i></a></li>
+                                    <li><a href="#" onclick="openImageModal('${product.image}')"><i class="fa fa-search-plus"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="featured__item__text">
+                                <h6><a href="#">${product.name}</a></h6>
+                                ${product.price ? `<h5>${product.price}</h5>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += productHtml;
+            });
+        }
+
+        // Open image modal
+        function openImageModal(imageSrc) {
+            document.getElementById('modalImage').src = imageSrc;
+            document.getElementById('imageModal').style.display = 'block';
+        }
+
+        // Close image modal
+        function closeImageModal() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside the image
+        window.onclick = function(event) {
+            var modal = document.getElementById('imageModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', initializeProducts);
+    </script>
+</body>
+</html>
+

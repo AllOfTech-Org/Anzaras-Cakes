@@ -12,15 +12,9 @@
 (function ($) {
 
     /*------------------
-        Preloader
-    --------------------*/
-    $(window).on('load', function () {
-        $(".loader").fadeOut();
-        $("#preloder").delay(200).fadeOut("slow");
-
-        /*------------------
             Gallery filter
         --------------------*/
+    $(window).on('load', function () {
         $('.featured__controls li').on('click', function () {
             $('.featured__controls li').removeClass('active');
             $(this).addClass('active');
