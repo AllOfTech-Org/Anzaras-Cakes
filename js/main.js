@@ -15,14 +15,21 @@
             Gallery filter
         --------------------*/
     $(window).on('load', function () {
+        // Make filter buttons clickable immediately
         $('.featured__controls li').on('click', function () {
             $('.featured__controls li').removeClass('active');
             $(this).addClass('active');
         });
+        
+        // Initialize MixItUp immediately without waiting for images
         if ($('.featured__filter').length > 0) {
             var containerEl = document.querySelector('.featured__filter');
             var mixer = mixitup(containerEl);
         }
+        
+        // Hide loading indicator immediately
+        $('#filter-loading').hide();
+        $('.featured__controls').removeClass('loading');
     });
 
     /*------------------
