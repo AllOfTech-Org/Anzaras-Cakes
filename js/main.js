@@ -26,10 +26,6 @@
             var containerEl = document.querySelector('.featured__filter');
             var mixer = mixitup(containerEl);
         }
-        
-        // Hide loading indicator immediately
-        $('#filter-loading').hide();
-        $('.featured__controls').removeClass('loading');
     });
 
     /*------------------
